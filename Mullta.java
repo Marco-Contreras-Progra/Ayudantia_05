@@ -1,6 +1,6 @@
 public class Mullta {
 	private Object _monto;
-	private Object _fechaGeneración;
+	private Object _fechaGeneracion;
 	private Object _estado;
 	public Usuario _unnamed_Usuario_;
 	public Prestamo _unnamed_Prestamo_;

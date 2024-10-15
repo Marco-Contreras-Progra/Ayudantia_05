@@ -1,47 +1,79 @@
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Biblioteca {
-	private String _nombre;
-	private String _dirección;
-	private List<Libro> _libros;
-	private List<Empleado> _empleados;
-	private List<Categoria> _categorías;
-	public Vector<Libro> _unnamed_Libro_ = new Vector<Libro>();
-	public Empleado _unnamed_Empleado_;
+    private String nombre;
+    private String direccion;
+    private List<Libro> libros;
+    private List<Empleado> empleados;
+    private List<Categoria> categorias;
 
-	public void agregarLibro(String aTitulo, String aAutor, String aISBN, int aAñoPublicacion, Categoria aCategoria) {
-		throw new UnsupportedOperationException();
-	}
 
-	public void modificarLibro(String aISBN, String aNuevoTitulo, String aNuevoAutor, int aNuevoAño, Categoria aNuevaCategoria) {
-		throw new UnsupportedOperationException();
-	}
+    public Biblioteca(String nombre, String direccion) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.libros = new ArrayList<>();
+        this.empleados = new ArrayList<>();
+        this.categorias = new ArrayList<>();
+    }
 
-	public void eliminarLibro(String aISBN) {
-		throw new UnsupportedOperationException();
-	}
+    public void agregarLibro(String titulo, String autor, String ISBN, int aÃ±oPublicacion, Categoria categoria) {
+        Libro nuevoLibro = new Libro(titulo, autor, ISBN, aÃ±oPublicacion, categoria);
+        libros.add(nuevoLibro);
+    }
 
-	public void agregarEmpleado(String aNombre, String aIdentificación, String aCargo) {
-		throw new UnsupportedOperationException();
-	}
+    public void modificarLibro(String ISBN, String nuevoTitulo, String nuevoAutor, int nuevoAÃ±o, Categoria nuevaCategoria) {
+        for (Libro libro : libros) {
+            if (libro.getISBN().equals(ISBN)) {
+                libro.actualizarInformacion(nuevoTitulo,  nuevoAutor, nuevoAÃ±o, nuevaCategoria);
+                return;
+            }
+        }
+        System.out.println("Libro no encontrado.");
+    }
 
-	public void modificarEmpleado(String aIdentificación, String aNuevoNombre, String aNuevoCargo) {
-		throw new UnsupportedOperationException();
-	}
+    public void eliminarLibro(String ISBN) {
+        libros.removeIf(libro -> libro.getISBN().equals(ISBN));
+    }
 
-	public void eliminarEmpleado(String aIdentificacion) {
-		throw new UnsupportedOperationException();
-	}
 
-	public void crearCategoria(String aNombre, String aDescricion) {
-		throw new UnsupportedOperationException();
-	}
+    public void agregarEmpleado(String nombre, String identificacion, String cargo) {
+        Empleado nuevoEmpleado = new Empleado(nombre, identificacion, cargo);
+        empleados.add(nuevoEmpleado);
+    }
 
-	public void editarCategoria(String aNombre, String aNuevoDescricion) {
-		throw new UnsupportedOperationException();
-	}
+    public void modificarEmpleado(String identificacion, String nuevoNombre, String nuevoCargo) {
+        for (Empleado empleado : empleados) {
+            if (empleado.getIdentificacion().equals(identificacion)) {
+                empleado.setNombre(nuevoNombre);
+                empleado.setCargo(nuevoCargo);
+                return;
+            }
+        }
+        System.out.println("Empleado no encontrado.");
+    }
 
-	public void eliminar_Categoria(String aNombre) {
-		throw new UnsupportedOperationException();
-	}
+    public void eliminarEmpleado(String identificacion) {
+        empleados.removeIf(empleado -> empleado.getIdentificacion().equals(identificacion));
+    }
+
+    public void crearCategoria(String nombre, String descripcion) {
+        Categoria nuevaCategoria = new Categoria(nombre, descripcion);
+        categorias.add(nuevaCategoria);
+    }
+
+    public void editarCategoria(String nombre, String nuevaDescripcion) {
+        for (Categoria categoria : categorias) {
+            if (categoria.getNombre().equals(nombre)) {
+                categoria.setDescripcion(nuevaDescripcion);
+                return;
+            }
+        }
+        System.out.println("CategorÃ­a no encontrada.");
+    }
+
+    public void eliminarCategoria(String nombre) {
+
+        categorias.removeIf(categoria -> categoria.getNombre().equals(nombre));
+    }
 }
